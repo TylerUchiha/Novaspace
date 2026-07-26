@@ -1,0 +1,7 @@
+{
+  "name": "NovaSpace Coworking Planner",
+  "description": "A high-end coworking space management app featuring interactive blueprints, real-time room booking, and a Gemini-powered smart space assistant.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
