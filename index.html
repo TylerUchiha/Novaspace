@@ -8,11 +8,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
       :root {
-        font-size: 14px;
+        font-size: 16px;
       }
       body {
         font-family: 'Inter', sans-serif;
         background-color: #f8fafc;
+      }
+      @media print {
+        :root {
+          font-size: 18px;
+        }
+        body {
+          background: #fff !important;
+          color: #0f172a !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        button, nav, aside, .no-print {
+          display: none !important;
+        }
       }
       .blueprint-grid {
         background-image: radial-gradient(#cbd5e1 1px, transparent 1px);

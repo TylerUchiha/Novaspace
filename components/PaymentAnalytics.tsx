@@ -140,29 +140,29 @@ export const PaymentAnalytics: React.FC<PaymentAnalyticsProps> = ({ locations, r
     }
 
     const doc = new jsPDF();
-    let y = 20;
+    let y = 22;
 
     doc.setFont("Helvetica", "bold");
-    doc.setFontSize(22);
+    doc.setFontSize(28);
     doc.setTextColor(15, 23, 42); 
-    doc.text("PAYMENT METHODS ANALYTICS", 14, y); y += 8;
+    doc.text("PAYMENT METHODS ANALYTICS", 14, y); y += 12;
 
-    doc.setFontSize(10);
+    doc.setFontSize(13);
     doc.setTextColor(100, 116, 139);
-    doc.text(`Generated on ${new Date().toLocaleString()}`, 14, y); y += 6;
+    doc.text(`Generated on ${new Date().toLocaleString()}`, 14, y); y += 8;
     const daysText = options.selectionType === 'specific' ? options.selectedDays.join(', ') : `${options.startDate} to ${options.endDate}`;
-    doc.text(`Reporting Period: ${daysText}`, 14, y); y += 12;
+    doc.text(`Reporting Period: ${daysText}`, 14, y); y += 14;
 
-    doc.setFontSize(14);
+    doc.setFontSize(18);
     doc.setTextColor(15, 23, 42);
-    doc.text(`TOTAL REVENUE: ${total.toLocaleString()} EGP`, 14, y); y += 10;
+    doc.text(`TOTAL REVENUE: ${total.toLocaleString()} EGP`, 14, y); y += 14;
 
-    doc.setFontSize(12);
+    doc.setFontSize(15);
     doc.setFont("Helvetica", "normal");
-    doc.text(`Instapay: ${instapay.toLocaleString()} EGP`, 14, y); y += 6;
-    doc.text(`Cash: ${cash.toLocaleString()} EGP`, 14, y); y += 6;
-    doc.text(`Card / POS: ${card.toLocaleString()} EGP`, 14, y); y += 6;
-    doc.text(`NovaPoints: ${novapoints.toLocaleString()} EGP`, 14, y); y += 6;
+    doc.text(`Instapay: ${instapay.toLocaleString()} EGP`, 14, y); y += 9;
+    doc.text(`Cash: ${cash.toLocaleString()} EGP`, 14, y); y += 9;
+    doc.text(`Card / POS: ${card.toLocaleString()} EGP`, 14, y); y += 9;
+    doc.text(`NovaPoints: ${novapoints.toLocaleString()} EGP`, 14, y); y += 9;
 
     doc.save(`Novaspace_Payments_Analytics_${options.selectionType === 'specific' ? 'selected_days' : options.startDate + '_to_' + options.endDate}.pdf`);
   };
