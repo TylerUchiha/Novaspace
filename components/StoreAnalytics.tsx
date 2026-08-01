@@ -95,25 +95,25 @@ export const StoreAnalytics: React.FC<StoreAnalyticsProps> = ({
     }
 
     const doc = new jsPDF();
-    let y = 20;
+    let y = 22;
 
     doc.setFont("Helvetica", "bold");
-    doc.setFontSize(22);
+    doc.setFontSize(28);
     doc.setTextColor(15, 23, 42); 
-    doc.text("STORE ANALYTICS REPORT", 14, y); y += 8;
+    doc.text("STORE ANALYTICS REPORT", 14, y); y += 12;
 
-    doc.setFontSize(10);
+    doc.setFontSize(13);
     doc.setTextColor(100, 116, 139);
-    doc.text(`Generated on ${new Date().toLocaleString()}`, 14, y); y += 6;
+    doc.text(`Generated on ${new Date().toLocaleString()}`, 14, y); y += 8;
     const daysText = options.selectionType === 'specific' ? options.selectedDays.join(', ') : `${options.startDate} to ${options.endDate}`;
-    doc.text(`Reporting Period: ${daysText}`, 14, y); y += 12;
+    doc.text(`Reporting Period: ${daysText}`, 14, y); y += 14;
 
-    doc.setFontSize(14);
+    doc.setFontSize(18);
     doc.setTextColor(15, 23, 42);
-    doc.text(`TOTAL STORE REVENUE: ${totalRevenue.toLocaleString()} EGP`, 14, y); y += 8;
-    doc.setFontSize(11);
+    doc.text(`TOTAL STORE REVENUE: ${totalRevenue.toLocaleString()} EGP`, 14, y); y += 12;
+    doc.setFontSize(15);
     doc.setFont("Helvetica", "normal");
-    doc.text(`Total Bookings Processed: ${exportRes.length}`, 14, y); y += 12;
+    doc.text(`Total Bookings Processed: ${exportRes.length}`, 14, y); y += 14;
 
     doc.save(`store_analytics_${options.selectionType === 'specific' ? 'selected_days' : options.startDate + '_to_' + options.endDate}.pdf`);
   };

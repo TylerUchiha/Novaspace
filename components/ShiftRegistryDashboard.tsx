@@ -610,15 +610,15 @@ export default function ShiftRegistryDashboard({
   const exportPeriodReport = ({ type, startDate, endDate }: { type: string, startDate: Date, endDate: Date }) => {
     const doc = new jsPDF();
     doc.setFont("Helvetica", "bold");
-    doc.setFontSize(18);
-    doc.text(`${type.charAt(0).toUpperCase() + type.slice(1)} Shift Summary Report`, 14, 20);
+    doc.setFontSize(24);
+    doc.text(`${type.charAt(0).toUpperCase() + type.slice(1)} Shift Summary Report`, 14, 22);
     
     doc.setFont("Helvetica", "normal");
-    doc.setFontSize(12);
+    doc.setFontSize(15);
     
-    doc.text(`Period: ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}`, 14, 30);
+    doc.text(`Period: ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}`, 14, 34);
     
-    let yOffset = 40;
+    let yOffset = 48;
     
     allEmployees.forEach(emp => {
         const periodShifts = emp.shifts.filter(s => {
@@ -627,14 +627,16 @@ export default function ShiftRegistryDashboard({
         });
         if (periodShifts.length === 0) return;
 
-        if (yOffset > 270) {
+        if (yOffset > 265) {
             doc.addPage();
-            yOffset = 20;
+            yOffset = 22;
         }
         doc.setFont("Helvetica", "bold");
+        doc.setFontSize(16);
         doc.text(`Employee: ${emp.name}`, 14, yOffset);
-        yOffset += 8;
+        yOffset += 10;
         doc.setFont("Helvetica", "normal");
+        doc.setFontSize(15);
 
         let totalWorkedMs = 0;
         let totalBreakMs = 0;
@@ -647,9 +649,9 @@ export default function ShiftRegistryDashboard({
         });
 
         doc.text(`Time Worked: ${formatTime(totalWorkedMs)}`, 14, yOffset);
-        yOffset += 8;
+        yOffset += 10;
         doc.text(`Time on Break: ${formatTime(totalBreakMs)}`, 14, yOffset);
-        yOffset += 12;
+        yOffset += 14;
     });
 
     doc.save(`Shift_${type}_Report_${startDate.toLocaleDateString().replace(/\//g, '-')}.pdf`);
@@ -660,28 +662,30 @@ export default function ShiftRegistryDashboard({
     const targets = activeEmployees;
     const doc = new jsPDF();
     doc.setFont("Helvetica", "bold");
-    doc.setFontSize(18);
-    doc.text("Shift Summary Report", 14, 20);
+    doc.setFontSize(24);
+    doc.text("Shift Summary Report", 14, 22);
     
     doc.setFont("Helvetica", "normal");
-    doc.setFontSize(12);
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 30);
+    doc.setFontSize(15);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 34);
     
-    let yOffset = 40;
+    let yOffset = 48;
     
     targets.forEach(emp => {
-        if (yOffset > 270) {
+        if (yOffset > 265) {
             doc.addPage();
-            yOffset = 20;
+            yOffset = 22;
         }
         doc.setFont("Helvetica", "bold");
+        doc.setFontSize(16);
         doc.text(`Employee: ${emp.name}`, 14, yOffset);
-        yOffset += 8;
+        yOffset += 10;
         doc.setFont("Helvetica", "normal");
+        doc.setFontSize(15);
         const activeShift = emp.shifts.find(s => s.endTime === null);
         if (activeShift) {
             doc.text(`Shift Started: ${new Date(activeShift.startTime).toLocaleTimeString()}`, 14, yOffset);
-            yOffset += 8;
+            yOffset += 10;
             
             // Re-calculate time just for PDF output roughly
             const now = Date.now();
@@ -691,7 +695,7 @@ export default function ShiftRegistryDashboard({
             });
             const worked = formatTime(now - activeShift.startTime - breaksSum);
             doc.text(`Time Worked: ${worked}`, 14, yOffset);
-            yOffset += 12;
+            yOffset += 14;
         }
     });
 

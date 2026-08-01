@@ -378,41 +378,41 @@ export default function AnalyticsDashboard({
     const totalRoomRevenue = targetRoomStats.reduce((sum, r) => sum + r.revenue, 0);
 
     const doc = new jsPDF();
-    let y = 20;
+    let y = 22;
 
     doc.setFont("Helvetica", "bold");
-    doc.setFontSize(22);
+    doc.setFontSize(28);
     doc.setTextColor(15, 23, 42); 
-    doc.text("SPACE ANALYTICS REPORT", 14, y); y += 8;
+    doc.text("SPACE ANALYTICS REPORT", 14, y); y += 12;
 
-    doc.setFontSize(10);
+    doc.setFontSize(13);
     doc.setTextColor(100, 116, 139);
-    doc.text(`Generated on ${new Date().toLocaleString()}`, 14, y); y += 6;
-    doc.text(`Branch: ${activeBranchName}`, 14, y); y += 6;
+    doc.text(`Generated on ${new Date().toLocaleString()}`, 14, y); y += 8;
+    doc.text(`Branch: ${activeBranchName}`, 14, y); y += 8;
     const daysText = options.selectionType === 'specific' ? options.selectedDays.join(', ') : `${options.startDate} to ${options.endDate}`;
-    doc.text(`Reporting Period: ${daysText}`, 14, y); y += 12;
+    doc.text(`Reporting Period: ${daysText}`, 14, y); y += 14;
 
-    doc.setFontSize(14);
+    doc.setFontSize(18);
     doc.setTextColor(15, 23, 42);
-    doc.text("SUMMARY STATISTICS", 14, y); y += 8;
+    doc.text("SUMMARY STATISTICS", 14, y); y += 12;
 
-    doc.setFontSize(11);
+    doc.setFontSize(15);
     doc.setFont("Helvetica", "normal");
-    doc.text(`Total Bookings: ${targetReservations.length}`, 14, y); y += 6;
-    doc.text(`Total Revenue: ${totalRoomRevenue.toLocaleString()} EGP`, 14, y); y += 12;
+    doc.text(`Total Bookings: ${targetReservations.length}`, 14, y); y += 9;
+    doc.text(`Total Revenue: ${totalRoomRevenue.toLocaleString()} EGP`, 14, y); y += 14;
+
+    doc.setFontSize(18);
+    doc.setFont("Helvetica", "bold");
+    doc.text("ROOM USAGE BREAKDOWN", 14, y); y += 12;
 
     doc.setFontSize(14);
-    doc.setFont("Helvetica", "bold");
-    doc.text("ROOM USAGE BREAKDOWN", 14, y); y += 8;
-
-    doc.setFontSize(10);
     doc.setFont("Helvetica", "normal");
     targetRoomStats.forEach(item => {
       doc.text(`• ${item.name} (${item.locationName}): ${item.count} bookings, ${item.hours} hrs - ${item.revenue.toLocaleString()} EGP`, 14, y);
-      y += 6;
-      if (y > 270) {
+      y += 9;
+      if (y > 265) {
         doc.addPage();
-        y = 20;
+        y = 22;
       }
     });
 
